@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Propiedades de registro</comment>
+<entry key="Password">1234</entry>
+<entry key="Email">santiago.alfaro2000@gmail.com</entry>
+</properties>
