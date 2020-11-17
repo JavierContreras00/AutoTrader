@@ -89,9 +89,10 @@ public class VentanaInicio extends JFrame {
 				String contraseniaCifrada = String.valueOf(pfContrasenia.getPassword());
 				
 				
-                
+                //comprobar si no pones nada pero sino estan 
 				if (!tfEmail.getText().equals("") && !pfContrasenia.equals("")) {
 					String nuevaContrasenia = Hash.sha1(contraseniaCifrada);
+					//guardar en el objeto usuario
 					mod.setEmail(tfEmail.getText());
 					mod.setContrasenia(nuevaContrasenia);
 

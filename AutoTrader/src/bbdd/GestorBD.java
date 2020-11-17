@@ -36,8 +36,8 @@ public class GestorBD {
 			// jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/vvs?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-					"root", "deusto");
+				//	"jdbc:mysql://localhost:?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+				//	"root", "deusto");
 
 			log(Level.INFO, "Base de datos conectada", null);
 
