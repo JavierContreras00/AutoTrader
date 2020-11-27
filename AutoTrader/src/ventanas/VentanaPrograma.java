@@ -18,7 +18,12 @@ public class VentanaPrograma extends JFrame {
 		getContentPane().add(btnBuscar);
 		
 		JButton btnVender = new JButton("Vender");
-		btnVender.setBounds(309, 269, 97, 25);
+		btnVender.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaAddVehiculo.main(null);
+			}
+		});
+		btnVender.setBounds(341, 269, 97, 25);
 		getContentPane().add(btnVender);
 		
 		JButton btnBorrar = new JButton("Borrar");
@@ -26,7 +31,7 @@ public class VentanaPrograma extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnBorrar.setBounds(418, 269, 97, 25);
+		btnBorrar.setBounds(172, 269, 97, 25);
 		getContentPane().add(btnBorrar);
 		
 		JLabel lblAutotrader = new JLabel("AutoTrader");

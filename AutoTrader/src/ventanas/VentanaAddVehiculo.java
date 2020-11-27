@@ -24,6 +24,7 @@ public class VentanaAddVehiculo extends JFrame {
 		JButton btnNewButton_1 = new JButton("Volver");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VentanaPrograma.main(null);
 			}
 		});
 		btnNewButton_1.setBounds(403, 286, 97, 25);
@@ -71,7 +72,7 @@ public class VentanaAddVehiculo extends JFrame {
 		
 		JLabel lblDescripcionDel = new JLabel("Descripcion del vehiculo");
 		lblDescripcionDel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
-		lblDescripcionDel.setBounds(163, 29, 249, 16);
+		lblDescripcionDel.setBounds(148, 24, 249, 33);
 		getContentPane().add(lblDescripcionDel);
 	}
 
