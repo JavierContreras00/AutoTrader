@@ -1,83 +1,122 @@
 package ventanas;
 
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.logging.FileHandler;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class VentanaAddVehiculo extends JFrame {
-	public VentanaAddVehiculo() {
-		getContentPane().setLayout(null);
-		
-		JButton btnNewButton = new JButton("Anadir");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(295, 286, 97, 25);
-		getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Volver");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VentanaPrograma.main(null);
-			}
-		});
-		btnNewButton_1.setBounds(403, 286, 97, 25);
-		getContentPane().add(btnNewButton_1);
-		
-		JList list = new JList();
-		list.setBounds(295, 92, 213, 136);
-		getContentPane().add(list);
-		
-		JComboBox cbMarca = new JComboBox();
-		cbMarca.setBounds(26, 90, 97, 22);
-		getContentPane().add(cbMarca);
-		
-		JComboBox cbCombustible = new JComboBox();
-		cbCombustible.setBounds(26, 136, 97, 22);
-		getContentPane().add(cbCombustible);
-		
-		JComboBox cbAnio = new JComboBox();
-		cbAnio.setBounds(26, 171, 97, 22);
-		getContentPane().add(cbAnio);
-		
-		JComboBox cbModelo = new JComboBox();
-		cbModelo.setBounds(148, 90, 97, 22);
-		getContentPane().add(cbModelo);
-		
-		JComboBox cbCarroceria = new JComboBox();
-		cbCarroceria.setBounds(148, 136, 97, 22);
-		getContentPane().add(cbCarroceria);
-		
-		JComboBox cbNPlazas = new JComboBox();
-		cbNPlazas.setBounds(148, 206, 97, 22);
-		getContentPane().add(cbNPlazas);
-		
-		JComboBox cbTransmision = new JComboBox();
-		cbTransmision.setBounds(26, 206, 97, 22);
-		getContentPane().add(cbTransmision);
-		
-		JComboBox cbNPuertas = new JComboBox();
-		cbNPuertas.setBounds(148, 242, 97, 22);
-		getContentPane().add(cbNPuertas);
-		
-		JButton btnNewButton_2 = new JButton("Imagenes");
-		btnNewButton_2.setBounds(26, 241, 97, 25);
-		getContentPane().add(btnNewButton_2);
-		
-		JLabel lblDescripcionDel = new JLabel("Descripcion del vehiculo");
-		lblDescripcionDel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
-		lblDescripcionDel.setBounds(148, 24, 249, 33);
-		getContentPane().add(lblDescripcionDel);
+
+import bbdd.GestorBD;
+import clasesBasicas.Coche;
+import clasesBasicas.EmailBienvenida;
+import clasesBasicas.Marca;
+import clasesBasicas.TextPrompt;
+import clasesBasicas.Usuario;
+import interfaces.LeeDeFichero;
+
+public class VentanaAddVehiculo extends JFrame implements LeeDeFichero {
+
+	/**
+	 * 
+	 */
+
+	private static final Font chapterFont = FontFactory.getFont(FontFactory.HELVETICA, 26, Font.NORMAL);
+	private static final Font titleFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.NORMAL);
+	private static final Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.NORMAL);
+	private static final long serialVersionUID = -161687001194396366L;
+	private String pdf;
+
+	private HashMap<String, Marca> mapaMarcas = new HashMap<>();
+	// private String fichero;
+
+	private GestorBD con = null;
+	private PreparedStatement ps;
+
+	// Componentes de la ventana
+
+	private JMenuBar menu;
+	private JMenu menuUsuarios;
+	private JMenuItem menuItem;
+	private JScrollPane spI;
+	private JScrollPane sp;
+	private TextPrompt ph;
+	private JPanel panelContenidos;
+
+	private JComboBox<String> cbMarca;
+	private String opcionNoSeleccionableMarca = "Marca";
+
+	private JComboBox<String> cbModelo; /// Hasta quen no se eliga la marca va a estar en enable = false
+	private String opcionNoSeleccionableModelo = "Modelo";
+
+	private JComboBox<String> cbCombustible;
+	private String opcionNoSeleccionableCombustible = "Tipo Combustible";
+
+	private JComboBox<String> cbCarroceria;
+	private String opcionNoSeleccionableCarroceria = "Carroceria";
+
+	private JComboBox<String> cbAnio;
+	private String opcionNoSeleccionableAnio = "Anio";
+
+	private JTextField tfPrecio;
+	private JTextField tfKms;
+	private JTextField tfPotencia;
+
+	private JComboBox<String> cbTransmision;
+	private String opcionNoSeleccionableTransmision = "Transmision";
+
+	private JComboBox<String> cbNPuertas;
+	private String opcionNoSeleccionableNPuertas = "Puertas";
+
+	private JComboBox<String> cbNPlazas;
+	private String opcionNoSeleccionableNPlazas = "Plazas";
+
+	private JComboBox<String> cbNRuedas;
+	private String opcionNoSeleccionableNRuedas = "Ruedas";
+
+	private JTextArea descripcion;
+	private JList<File> imagenes;
+
+	private JButton btnAniadir;
+	private JButton btnVolver;
+	private JButton btnImagenes;
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-}
