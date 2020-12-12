@@ -25,4 +25,26 @@ public class AbrirPDF extends JFrame {
 		panelContenidos.setLayout(new BorderLayout(15, 15));
 
 		JButton ayuda = new JButton("Ayuda");
+		// EVENTO DEL BOTON
+				ayuda.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evento) {
+
+						try {
+							Process p = Runtime.getRuntime().exec("rundll32 SHELL32.DLL,ShellExec_RunDLL " + "src/prueba.pdf");
+							System.out.println("He llegado");
+						} catch (Exception evvv) {
+							JOptionPane.showMessageDialog(null,
+									"No se puede abrir el archivo de ayuda, probablemente fue borrado", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+
+						}
+					}
+				});
+
+				panelContenidos.add(ayuda);
+			}
+
+			public static void main(String[] args) {
+				AbrirPDF v = new AbrirPDF();
+				v.setVisible(true);
 }}
