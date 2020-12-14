@@ -119,4 +119,52 @@ public class VentanaAddVehiculo extends JFrame implements LeeDeFichero {
 	private JButton btnAniadir;
 	private JButton btnVolver;
 	private JButton btnImagenes;
+	@Override
+	public void leeMarcas() {
+		BufferedReader br = null;
+		FileReader ficheroMarca = null;
+
+		try {
+			ficheroMarca = new FileReader("data/marcas.csv");
+			br = new BufferedReader(ficheroMarca);
+			String fila = null;
+			while ((fila = br.readLine()) != null) {
+				String[] valores = fila.split(";");
+				cbMarca.addItem(valores[1]);
+				mapaMarcas.put(valores[0], new Marca(valores[0], valores[1]));
+			}
+			ficheroMarca.close();
+			br.close();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	@Override
+	public void leeModelos() {
+		BufferedReader br = null;
+		FileReader ficheroModelos = null;
+
+		try {
+			ficheroModelos = new FileReader("data/modelos.csv");
+			br = new BufferedReader(ficheroModelos);
+			String fila = null;
+			while ((fila = br.readLine()) != null) {
+				String[] valores = fila.split(";");
+				mapaMarcas.get(valores[0]).addModelo(valores[2]);
+			}
+			ficheroModelos.close();
+			br.close();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
 	}
