@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 import clasesBasicas.Marca;
+import clasesBasicas.Usuario;
 import interfaces.LeeDeFichero;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -16,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaProgramaFs extends JFrame implements LeeDeFichero {
-	public VentanaProgramaFs() {
+	public VentanaProgramaFs(Usuario u) {
 		getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Buscar");
@@ -32,6 +33,13 @@ public class VentanaProgramaFs extends JFrame implements LeeDeFichero {
 		getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Vender");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaAddVehiculo v = new VentanaAddVehiculo(u);
+				v.setVisible(true);
+				setVisible(false);				
+			}
+		});
 		btnNewButton_2.setBounds(308, 215, 97, 25);
 		getContentPane().add(btnNewButton_2);
 		
