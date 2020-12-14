@@ -55,6 +55,8 @@ import clasesBasicas.Usuario;
 import interfaces.LeeDeFichero;
 
 public class VentanaAddVehiculo extends JFrame implements LeeDeFichero {
+	public VentanaAddVehiculo() {
+	}
 
 	/**
 	 * 
