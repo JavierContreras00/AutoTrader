@@ -126,6 +126,14 @@ public class VentanaResultados extends JFrame {
 
 	}
 	
-
+	public JPanel crearPanel(VentanaPrograma vp) {
+		lbMarca = new JLabel(vp.cbMarca.getSelectedItem().toString());
+		panelCentralD.add(lbMarca);
+		
+		
+		
+		
+		return panelCentral;
+	}
 
 }
