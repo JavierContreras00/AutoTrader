@@ -1,27 +1,57 @@
 package ventanas;
 
-import javax.swing.JFrame;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.awt.event.ActionEvent;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import bbdd.GestorBD;
+import clasesBasicas.Coche;
+import clasesBasicas.Usuario;
 
 public class VentanaVehiculosUsuario extends JFrame {
+	private JPanel panelContenidos;
+	private JButton btnELiminar;
+	private JButton btnVolver;
 	public VentanaVehiculosUsuario(Usuario u) {
-		getContentPane().setLayout(null);
-		DefaultListModel<String> modeloLista = new DefaultListModel<String>();
+		this.setTitle("VVS");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 500, 300);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/vvs.png"));
+
+		panelContenidos = new JPanel();
+		panelContenidos.setBackground(Color.WHITE);
+		setContentPane(panelContenidos);
+		setLayout(new BorderLayout(10, 10));
+
+		JPanel panelCentral = new JPanel();
+		panelCentral.setBackground(Color.WHITE);
+		panelCentral.setLayout(new GridLayout(1, 1));
+		panelContenidos.add(panelCentral, BorderLayout.CENTER);
+		
+		JPanel panelBotones = new JPanel();
+		panelBotones.setBackground(Color.WHITE);
+		panelBotones.setLayout(new GridLayout(1,2));
+		panelContenidos.add(panelBotones, BorderLayout.SOUTH);
+
 		JList<String> listaVehiculos = new JList<String>();
+		DefaultListModel<String> modeloLista = new DefaultListModel<String>();
+		btnELiminar = new JButton("Eliminar");
 
-
-		JButton btnELiminar = new JButton("Eliminar");
 		try {
 			Connection con = GestorBD.getConexion();
 			Statement st = con.createStatement();
@@ -66,11 +96,9 @@ public class VentanaVehiculosUsuario extends JFrame {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		btnELiminar.setBounds(85, 215, 97, 25);
-		getContentPane().add(btnELiminar);
 		
-		JButton btnVolver = new JButton("Volver");
-        btnVolver.addActionListener(new ActionListener() {
+		btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -79,13 +107,12 @@ public class VentanaVehiculosUsuario extends JFrame {
 				dispose();
 			}
 		});
-		btnVolver.setBounds(213, 215, 97, 25);
-		getContentPane().add(btnVolver);
-		
 		listaVehiculos.setModel(modeloLista);
+		panelCentral.add(new JScrollPane(listaVehiculos));
 
-		
-		listaVehiculos.setBounds(85, 37, 225, 134);
-		getContentPane().add(listaVehiculos);
+		panelBotones.add(btnELiminar);
+		panelBotones.add(btnVolver);
+
 	}
+
 }
