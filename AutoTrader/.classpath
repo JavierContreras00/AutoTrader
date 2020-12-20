@@ -3,9 +3,9 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-8.0.18.jar"/>
-	<classpathentry kind="lib" path="C:/Users/javic/Desktop/2020-2021/Primer cuatri/PROG3/VVS-master/VVS/lib/itextpdf-5.4.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/javic/Desktop/2020-2021/Primer cuatri/PROG3/VVS-master/VVS/lib/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/javic/Desktop/2020-2021/Primer cuatri/PROG3/VVS-master/VVS/lib/javax.servlet.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="lib/javax.mail.jar"/>
+	<classpathentry kind="lib" path="lib/itextpdf-5.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/javax.servlet.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
