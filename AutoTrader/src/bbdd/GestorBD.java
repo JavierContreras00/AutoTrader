@@ -12,7 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+import clasesBasicas.Coche;
 import clasesBasicas.Usuario;
 
 public class GestorBD {
@@ -36,8 +36,8 @@ public class GestorBD {
 			// jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(
-					//"jdbc:mysql://localhost: ?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-					//"root", "deusto");
+					"jdbc:mysql://localhost:3306/autrader?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+					"root", "deusto");
 
 			log(Level.INFO, "Base de datos conectada", null);
 
@@ -146,7 +146,66 @@ public class GestorBD {
 
 	}
 
+	public int obtenerIdVehiculo() {
+		con = getConexion();
+		int idMax = 0;
+		String sql = "SELECT MAX(IDVEHICULOS) AS  IDMAXIMO FROM VEHICULOS";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			log(Level.INFO, "Buscando id en la base de datos", null);
+			if (rs.next()) {
+				idMax = rs.getInt("IDMAXIMO");
 
+				log(Level.INFO, "Id encontrado", null);
+
+			}
+
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al buscar el id en la base de datos", e);
+		}
+		return idMax + 1;
+
+	}
+
+	public boolean aniadirCoche(Coche c, Usuario u, File ficheroImg) {
+		con = getConexion();
+		String sql = "INSERT INTO vehiculos (IDVEHICULOS,MARCA, MODELO, CARROCERIA, COMBUSTIBLE, ANIO, PRECIO, KILOMETROS, POTENCIA, TRANSMISION, NPLAZAS, 	NPUERTAS,idusuarios, IMAGEN)"
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, c.getIdvehiculos());
+			ps.setString(2, c.getMarca());
+			ps.setString(3, c.getModelo());
+			ps.setString(4, c.getCarroceria());
+			ps.setString(5, c.getCombustible());
+			ps.setInt(6, c.getAnio());
+			ps.setInt(7, c.getPrecio());
+			ps.setLong(8, c.getKilometros());
+			ps.setInt(9, c.getPotencia());
+			ps.setString(10, c.getTransmision());
+			ps.setInt(11, c.getnPlazas());
+			ps.setInt(12, c.getnPuertas());
+			ps.setInt(13, u.getIdusuarios());
+			try {
+
+				FileInputStream fis = new FileInputStream(ficheroImg);
+				ps.setBinaryStream(14, fis, (int) ficheroImg.length());
+
+			} catch (FileNotFoundException e) {
+				log(Level.SEVERE, "No se ha encontrado la imagen", e);
+			}
+
+			ps.execute();
+			log(Level.INFO, "Vehiculos insertado conrrectamente", null);
+			return true;
+
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al insertar coche en la base de datos", e);
+			return false;
+		}
+
+	}
 
 	public int borrarUsuario(Usuario u, int id) {
 		try {
