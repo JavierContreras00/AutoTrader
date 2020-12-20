@@ -28,10 +28,10 @@ public class VentanaVehiculosUsuario extends JFrame {
 	private JButton btnELiminar;
 	private JButton btnVolver;
 	public VentanaVehiculosUsuario(Usuario u) {
-		this.setTitle("VVS");
+		this.setTitle("AutoTrader");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 500, 300);
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/vvs.png"));
+		//this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/.png"));
 
 		panelContenidos = new JPanel();
 		panelContenidos.setBackground(Color.WHITE);
