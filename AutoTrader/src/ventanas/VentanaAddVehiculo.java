@@ -45,6 +45,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 
 import bbdd.GestorBD;
 import clasesBasicas.Coche;
