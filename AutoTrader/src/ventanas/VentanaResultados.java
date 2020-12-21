@@ -49,7 +49,7 @@ public class VentanaResultados extends JFrame {
 	//crear dos constructores para las ventanas de los filtros diferentes
 
 	public VentanaResultados(Usuario u, VentanaPrograma vp) {
-		this.setTitle("VVS");
+		this.setTitle("AutoTrader");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 500, 500);
 		this.setMinimumSize(new Dimension(250, 250));
