@@ -131,10 +131,10 @@ public class VentanaAddVehiculo extends JFrame implements LeeDeFichero {
 	private JButton btnImagenes;
 
 	public VentanaAddVehiculo(Usuario u) {
-		this.setTitle("VVS");
+		this.setTitle("AutoTrader");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 500, 300);
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/vvs.png"));
+		// this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/.png"));
 
 //CREACION DE PANELES
 
