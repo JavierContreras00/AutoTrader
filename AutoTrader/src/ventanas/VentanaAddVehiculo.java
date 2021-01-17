@@ -591,7 +591,7 @@ public class VentanaAddVehiculo extends JFrame implements LeeDeFichero {
 											try {
 
 												EmailBienvenida.mandarMailConArchivo("smtp.gmail.com", "587",
-														"autotrader.informacion@gmail.com", "contraseña", u.getEmail(),
+														"autotraderdeusto@gmail.com", "deustooo", u.getEmail(),
 														"¡Vehiculo aniadido con exito!",
 														"Estimad@ cliente, le mandamos la ficha del vehiculo", pdf);
 

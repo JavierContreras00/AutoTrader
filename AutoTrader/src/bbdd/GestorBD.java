@@ -37,7 +37,7 @@ public class GestorBD {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/autotrader?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-					"root", "deusto");
+					"root", "alcadozo66");
 
 			log(Level.INFO, "Base de datos conectada", null);
 

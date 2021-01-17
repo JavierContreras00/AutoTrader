@@ -87,12 +87,9 @@ public class VentanaInicio extends JFrame {
 				Usuario mod = new Usuario();
 				pfContrasenia.enableInputMethods(true);
 				String contraseniaCifrada = String.valueOf(pfContrasenia.getPassword());
-				
-				
-                //comprobar si no pones nada pero sino estan 
+
 				if (!tfEmail.getText().equals("") && !pfContrasenia.equals("")) {
 					String nuevaContrasenia = Hash.sha1(contraseniaCifrada);
-					//guardar en el objeto usuario
 					mod.setEmail(tfEmail.getText());
 					mod.setContrasenia(nuevaContrasenia);
 
@@ -100,7 +97,6 @@ public class VentanaInicio extends JFrame {
 						u = new Usuario(mod.getIdusuarios(), mod.getNick(), mod.getNombre(), mod.getApellido(),
 								mod.getEmail(), mod.getContrasenia());
 						mod.getNombre();
-						//casilla de recordar usuario
 						if (cb.isSelected()) {
 							Properties properties = new Properties();
 							if (tfEmail.getText() != null) {
@@ -110,7 +106,6 @@ public class VentanaInicio extends JFrame {
 								properties.setProperty("Password", String.valueOf(pfContrasenia.getPassword()));
 
 							}
-							//guarda en el xml
 							try {
 								properties.storeToXML(new FileOutputStream("data/Usuarios.xml"),
 										"Propiedades de registro");
@@ -122,12 +117,14 @@ public class VentanaInicio extends JFrame {
 							}
 
 							modSql.dissconect();
-							
+							VentanaPrograma vp = new VentanaPrograma(u);
+							vp.setVisible(true);
 							setVisible(false);
 
 						} else {
 
-							
+							VentanaProgramaFs v = new VentanaProgramaFs(u);
+							v.setVisible(true);
 							setVisible(false);
 						}
 
@@ -187,9 +184,6 @@ public class VentanaInicio extends JFrame {
 		panelCentralInf.add(lb);
 		panelCentralInf.add(cb);
 
-		
-		
-		//recordar usuario
 		this.addWindowListener(new WindowAdapter() {
 			public void windowOpened(WindowEvent e) {
 				Properties properties = new Properties();

@@ -123,11 +123,11 @@ public class VentanaPrograma extends JFrame implements LeeDeFichero {
 	public JPanel panelCentralInf;
 
 	public VentanaPrograma(Usuario u) {
-		this.setTitle("VVS");
+		this.setTitle("AutoTrader");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 500, 300);
 		this.setMinimumSize(new Dimension(250, 250));
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/vvs.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/AutoTrader-Logo.png"));
 
 		// Panel principal
 		panelContenidos = new JPanel();

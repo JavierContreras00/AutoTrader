@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 import javax.swing.JTextField;
 
 import bbdd.GestorBD;
-
+import clasesBasicas.EmailBienvenida;
 import clasesBasicas.Hash;
 import clasesBasicas.TextPrompt;
 import clasesBasicas.Usuario;
@@ -169,24 +169,24 @@ public class VentanaRegistrarse extends JFrame {
 						if (modSql.registrar(mod)) {
 							JOptionPane.showMessageDialog(null, "Registro realizado con exito");
 							// Mandar email de bienvenida
-							/*Thread hilo = new Thread(new Runnable() {
+							Thread hilo = new Thread(new Runnable() {
 
 								@Override
 								public void run() {
 									String mensaje = "Estimado " + tfNombre.getText() + " " + tfApellido.getText()
 											+ ". " + "<i>Gracias por registrarte en AutoTrader como " + tfNick.getText()
 											+ ". �Nos gustaria darte la bienvenida a nuestra pagina.!</i><br>";
-									mensaje += "<font color=red>Para cualquier duda, por favor contactar con autotrader.correo@gmail.com</font>";
-									 try {
-										EmailBienvenida.mandarMail("smtp.gmail.com", "587", "autotrader.correo@gmail.com",
-												"Santialfaro", tfEmail.getText(), "Correo de bienvenida a AutoTrader", mensaje);
+									mensaje += "<font color=red>Para cualquier duda, por favor contactar con autoTraderDeusto@gmail.com</font>";
+									try {
+										EmailBienvenida.mandarMail("smtp.gmail.com", "587", "autotraderdeusto@gmail.com",
+												"deustooo", tfEmail.getText(), "Correo de bienvenida a AutoTrader", mensaje);
 										System.out.println("El email se ha enviado");
 									} catch (Exception ex) {
 										System.out.println("No se ha podido enviar el email " + ex.getMessage());
 									}
 								}
 							});
-							hilo.start();*/
+							hilo.start();
 
 						} else {
 							JOptionPane.showMessageDialog(null, "No se ha podido registrar");
@@ -220,4 +220,5 @@ public class VentanaRegistrarse extends JFrame {
 			return false;
 		}
 	}
+
 }
