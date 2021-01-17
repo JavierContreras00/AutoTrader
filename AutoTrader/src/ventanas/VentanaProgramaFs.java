@@ -37,7 +37,7 @@ import interfaces.LeeDeFichero;
 
 /**
  * 
- * @author jonma Ventana para la busqueda de vehiculos con filtros sencillos
+ *  Ventana para la busqueda de vehiculos con filtros sencillos
  *
  */
 
