@@ -162,7 +162,7 @@ public class VentanaInicio extends JFrame {
 		panelCentral.setLayout(new BorderLayout(0, 0));
 		panelContenidos.add(panelCentral, BorderLayout.CENTER);
 
-		// ingerior central panel
+		// inferior central panel
 		JPanel panelCentralInf = new JPanel();
 		panelCentralInf.setBackground(Color.WHITE);
 		panelCentralInf.setLayout(new GridLayout(3, 2, 5, 5));

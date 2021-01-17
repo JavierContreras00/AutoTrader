@@ -47,17 +47,17 @@ public class VentanaProgramaFs extends JFrame implements LeeDeFichero {
 	private JButton btnBuscar;
 	private JButton btnFiltrosAvanzados;
 	private JButton btnVender;
-
-	private JMenuBar menu;
 	private JMenu menuUsuarios;
 	private JMenuItem menuItem;
+	private JMenuBar menu;
+	
 
-	// ComboBox y sus etquetas
+
 	
 	private JComboBox<String> cbMarca;
 	private String opcionNoSeleccionableMarca = "Marca";
 
-	private JComboBox<String> cbModelo; /// Hasta quen no se eliga la marca va a estar en enable = false
+	private JComboBox<String> cbModelo; /// va estar false hasta que no se elija la marca
 	private String opcionNoSeleccionableModelo = "Modelo";
 
 	private JComboBox<String> cbAnio;
@@ -76,13 +76,13 @@ public class VentanaProgramaFs extends JFrame implements LeeDeFichero {
 		this.setBounds(100, 100, 550, 300);
 		this.setMinimumSize(new Dimension(250, 250));
 
-		// Panel principal
+		// principal
 		panelContenidos = new JPanel();
 		panelContenidos.setBackground(Color.WHITE);
 		setContentPane(panelContenidos);
 		panelContenidos.setLayout(new BorderLayout(15, 15));
 
-//Panel central
+        //Panel central
 		JPanel panelCentral = new JPanel();
 		panelCentral.setBackground(Color.WHITE);
 		panelCentral.setLayout(new BorderLayout(0, 0));
@@ -101,9 +101,6 @@ public class VentanaProgramaFs extends JFrame implements LeeDeFichero {
 		});
 		cbMarca.setModel(new DefaultComboBoxModel<String>() {
 
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 			private boolean seleccionPermitida = true;
 
@@ -111,12 +108,10 @@ public class VentanaProgramaFs extends JFrame implements LeeDeFichero {
 			public void setSelectedItem(Object objeto) {
 				if (!opcionNoSeleccionableMarca.equals(objeto)) {
 					super.setSelectedItem(objeto);
-
 				} else if (seleccionPermitida) {
 					seleccionPermitida = false;
 					super.setSelectedItem(objeto);
 				}
-
 			}
 
 		});
@@ -141,13 +136,10 @@ public class VentanaProgramaFs extends JFrame implements LeeDeFichero {
 
 			}
 		});
-
 		cbModelo = new JComboBox<String>();
 		cbModelo.setModel(new DefaultComboBoxModel<String>() {
 
-			/**
-			 * 
-			 */
+			
 			private static final long serialVersionUID = 1L;
 			private boolean seleccionPermitida = true;
 

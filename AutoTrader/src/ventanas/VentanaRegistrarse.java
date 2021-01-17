@@ -25,13 +25,18 @@ import clasesBasicas.Usuario;
 
 public class VentanaRegistrarse extends JFrame {
 	/**
-	 * 
+	 * ventana para registrarse  
 	 */
 	private static final long serialVersionUID = -4377029028392917164L;
 
 	public static Pattern patCorreo = Pattern
 			.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
+	
+	private JTextField tfNombre;
+	private JTextField tfApellido;
+	private JTextField tfNick;
+	private JTextField tfEmail;
 	private JPanel panelContenidos;
 	private JLabel lbNombre;
 	private JLabel lbApellido;
@@ -39,10 +44,6 @@ public class VentanaRegistrarse extends JFrame {
 	private JLabel lbEmail;
 	private JLabel lbContrasenia;
 	private JLabel lbConfirmarContrasenia;
-	private JTextField tfNombre;
-	private JTextField tfApellido;
-	private JTextField tfNick;
-	private JTextField tfEmail;
 	private JPasswordField pfContrasenia;
 	private JPasswordField pfConfirmarContrasenia;
 	private JButton btnRegistrarse;
@@ -55,19 +56,19 @@ public class VentanaRegistrarse extends JFrame {
 		this.setBounds(100, 100, 500, 100);
 		this.setMinimumSize(new Dimension(250, 300));
 
-//Panel principal	
+       //principal panel 	
 		panelContenidos = new JPanel();
 		panelContenidos.setBackground(Color.WHITE);
 		setContentPane(panelContenidos);
 		panelContenidos.setLayout(new BorderLayout(15, 15));
 
-//Panel Central(Va a ir todo )
+      //Panel Central que contendra todo
 		JPanel panelCentral = new JPanel();
 		panelCentral.setBackground(Color.WHITE);
 		panelCentral.setLayout(new BorderLayout(0, 0));
 		panelContenidos.add(panelCentral, BorderLayout.CENTER);
 
-		// Panel Central Superior
+		// central superior panel
 		JPanel panelCentralSup = new JPanel();
 		panelCentralSup.setBackground(Color.WHITE);
 		panelCentralSup.setLayout(new GridLayout(6, 2, 5, 15));
@@ -108,8 +109,7 @@ public class VentanaRegistrarse extends JFrame {
 		panelCentralSup.add(tfEmail);
 		panelCentralSup.add(lbContrasenia);
 		panelCentralSup.add(pfContrasenia);
-		// panelCentralSup.add(lbConfirmarContrasenia);
-		// panelCentralSup.add(pfConfirmarContrasenia);
+		
 
 		// Panel Inferior
 		JPanel panelInferior = new JPanel();
@@ -155,7 +155,7 @@ public class VentanaRegistrarse extends JFrame {
 
 					} else {
 
-						// Conexion con la base de datos
+						// Conexion con la BD
 						GestorBD modSql = new GestorBD();
 						Usuario mod = new Usuario();
 						mod.setNick(tfNick.getText());
@@ -168,7 +168,7 @@ public class VentanaRegistrarse extends JFrame {
 
 						if (modSql.registrar(mod)) {
 							JOptionPane.showMessageDialog(null, "Registro realizado con exito");
-							// Mandar email de bienvenida
+							// el email de bienvenida
 							Thread hilo = new Thread(new Runnable() {
 
 								@Override
@@ -180,7 +180,7 @@ public class VentanaRegistrarse extends JFrame {
 									try {
 										EmailBienvenida.mandarMail("smtp.gmail.com", "587", "autotraderdeusto@gmail.com",
 												"deustooo", tfEmail.getText(), "Correo de bienvenida a AutoTrader", mensaje);
-										System.out.println("El email se ha enviado");
+										System.out.println("El email se ha enviado correctamente");
 									} catch (Exception ex) {
 										System.out.println("No se ha podido enviar el email " + ex.getMessage());
 									}
@@ -212,10 +212,9 @@ public class VentanaRegistrarse extends JFrame {
 			System.out.println(correo + " cumple el patron");
 			return patCorreo.matcher(correo).matches();
 		} else {
-			if (showErrorWindow) { // boolean showErrorWindow para que no muestre la ventana en el test
+			if (showErrorWindow) { 
 				JOptionPane.showMessageDialog(null, correo + " no cumple el patron");
 				System.out.println(correo + " no cumple el patron" + patCorreo);
-
 			}
 			return false;
 		}
