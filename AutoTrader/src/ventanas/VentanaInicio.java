@@ -32,21 +32,21 @@ import javax.swing.JOptionPane;
 
 public class VentanaInicio extends JFrame {
 	/**
-	 * 
+	 * Ventana del LogIn
 	 */
 	private static final long serialVersionUID = -8612972599187772531L;
 
 	public String emailVP;
-
+	
+	private JCheckBox cb;
+	private final JButton btnIniciarSesion;
+	private final JButton btnRegistrarse;
 	public JTextField tfEmail;
 	private JPasswordField pfContrasenia;
 	private JLabel lbEmail;
 	private JLabel lblContrasenia;
 	private JPanel panelContenidos;
-	private final JButton btnIniciarSesion;
-	private final JButton btnRegistrarse;
 	private TextPrompt ph;
-	private JCheckBox cb;
 	private JLabel lb;
 	public Usuario u;
 	private JMenu menuUsuario;
@@ -65,13 +65,13 @@ public class VentanaInicio extends JFrame {
 		setContentPane(panelContenidos);
 		panelContenidos.setLayout(new BorderLayout(15, 15));
 
-//Panel derecho
+        //derecho panel
 		JPanel panelDer = new JPanel();
 		panelDer.setBackground(Color.WHITE);
 		panelDer.setLayout(new BorderLayout(0, 0));
 		panelContenidos.add(panelDer, BorderLayout.EAST);
 
-		// Panel derecho inferior
+		// derecho inferior panel
 		JPanel panelDerInf = new JPanel();
 		panelDerInf.setBackground(Color.WHITE);
 		panelDerInf.setLayout(new GridLayout(3, 1, 0, 5));
@@ -156,13 +156,13 @@ public class VentanaInicio extends JFrame {
 		panelDerInf.add(btnRegistrarse);
 		panelDerInf.add(lb);
 
-//Panel Central(Usuario y contrase�a) solo los texfield y labels
+        //central panel 
 		JPanel panelCentral = new JPanel();
 		panelCentral.setBackground(Color.WHITE);
 		panelCentral.setLayout(new BorderLayout(0, 0));
 		panelContenidos.add(panelCentral, BorderLayout.CENTER);
 
-		// Panel central inferior
+		// ingerior central panel
 		JPanel panelCentralInf = new JPanel();
 		panelCentralInf.setBackground(Color.WHITE);
 		panelCentralInf.setLayout(new GridLayout(3, 2, 5, 5));
