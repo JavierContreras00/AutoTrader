@@ -98,6 +98,7 @@ public class VentanaInicio extends JFrame {
 								mod.getEmail(), mod.getContrasenia());
 						mod.getNombre();
 						if (cb.isSelected()) {
+							
 							Properties properties = new Properties();
 							if (tfEmail.getText() != null) {
 								properties.setProperty("Email", tfEmail.getText().toString());
@@ -184,10 +185,16 @@ public class VentanaInicio extends JFrame {
 		panelCentralInf.add(lb);
 		panelCentralInf.add(cb);
 
+		
+		
+		
+		
 		this.addWindowListener(new WindowAdapter() {
 			public void windowOpened(WindowEvent e) {
 				Properties properties = new Properties();
 				try {
+					//leer el archivo properties
+					//primero tiene que cargarlo
 					properties.loadFromXML(new FileInputStream("data/Usuarios.xml"));
 					String email = properties.getProperty("Email");
 					String password = properties.getProperty("Password");
